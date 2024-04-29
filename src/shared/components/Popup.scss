@@ -1,0 +1,113 @@
+.popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  max-width: 820px;
+  min-width: 300px;
+  height: fit-content;
+  background-color: #333333;
+  border-radius: 24px;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.05);
+  animation: popupFadeUp 0.3s ease forwards;
+
+  pointer-events: auto;
+
+  &[data-open='false'] {
+    animation: popupFadeDown 0.3s ease forwards;
+    pointer-events: none;
+  }
+
+  .popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    padding: 24px;
+    font-size: 1rem;
+  }
+
+  .popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 8px;
+    padding: 24px;
+    .close,
+    .ok {
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      line-height: 23px;
+      font-weight: 500;
+      width: fit-content;
+      min-width: 60px;
+      height: 40px;
+      border-radius: 20px;
+      padding: 8px 20px;
+      transition:
+        background-color 0.2s,
+        transform 0.2s;
+    }
+    .close {
+      color: var(--gray-400) !important;
+      cursor: pointer;
+      &:hover {
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .ok {
+      background-color: var(--color-blue);
+      color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--color-blue-hoverd);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    width: calc(100vw - 40px);
+    border-radius: 16px;
+    .popup-footer {
+      padding: 16px;
+      .close,
+      .ok {
+        height: 32px;
+        border-radius: 16px;
+        padding: 4px 12px;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 998;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: backdropFadeIn 0.3s ease forwards;
+  pointer-events: auto;
+
+  &[data-open='false'] {
+    animation: backdropFadeOut 0.3s ease forwards;
+    pointer-events: none;
+  }
+}

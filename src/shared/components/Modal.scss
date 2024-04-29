@@ -1,0 +1,60 @@
+.modal-wrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  z-index: 999;
+  bottom: 40px;
+  animation: fadeAndScaleIn 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+
+  &[data-open='false'] {
+    animation: fadeAndScaleOut 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+  }
+  .modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 464px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.03);
+    padding: 32px 40px;
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      text-align: center;
+      .space-dummy {
+        width: 22px;
+      }
+      span {
+        text-align: center;
+      }
+      .close-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        min-width: 1.5rem;
+        padding: 0px;
+        height: 1.5rem;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        transition: background-color 0.2s;
+        border-radius: 5px;
+        &:hover {
+          background-color: var(--gray-300);
+        }
+        img {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+  }
+}

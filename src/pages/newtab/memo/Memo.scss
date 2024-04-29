@@ -1,0 +1,52 @@
+.Memo {
+  .memo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .memo-textarea {
+      font-family: 'Pretendard';
+      min-width: 800px;
+      min-height: 600px;
+      font-size: 1rem;
+      background-color: #ffffff1a;
+      backdrop-filter: blur(20px);
+      border: none;
+      padding: 16px;
+      transition:
+        background-color 0.2s,
+        outline 0.2s;
+      border-radius: 16px;
+      font-weight: 600;
+      color: white;
+      outline: 2px solid #ffffff00;
+      &:hover {
+        background-color: #ffffff22;
+      }
+      &:focus {
+        outline: 2px solid #ffffff6a;
+        background-color: #ffffff22;
+      }
+      &::-webkit-resizer {
+        display: none;
+      }
+    }
+
+    .loader {
+      width: 36px;
+      height: 36px;
+      background-color: white;
+      &.loading {
+        @keyframes spin {
+          from {
+            transform: rotate(0);
+          }
+          to {
+            transform: rotate(360);
+          }
+        }
+        animation: spin 2s linear infinite;
+      }
+    }
+  }
+}

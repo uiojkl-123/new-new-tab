@@ -1,0 +1,34 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+$fadeInMedium: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+$myColor: #333333;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $myColor;
+  font-family: fantasy;
+}
+
+.hellow {
+  width: 100%;
+  position: relative;
+  font-size: 60px;
+  font-family: 'Syne';
+  font-weight: 800;
+  color: transparent;
+  background: text linear-gradient(45deg, #ffffff 80%, #b6b6b6);
+  -webkit-text-fill-color: transparent;
+  // filter: drop-shadow(0 40px 120px rgba(0, 0, 0, 0.2));
+  text-align: center;
+}
