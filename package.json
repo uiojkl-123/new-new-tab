@@ -25,12 +25,13 @@
   },
   "type": "module",
   "dependencies": {
+    "@redux-devtools/extension": "^3.3.0",
     "construct-style-sheets-polyfill": "3.1.0",
     "react": "18.2.0",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "18.2.0",
     "uuid": "^9.0.1",
+    "uuidv7": "^0.6.3",
     "webextension-polyfill": "0.10.0",
     "zustand": "^4.5.2"
   },
@@ -43,6 +44,7 @@
     "@types/chrome": "0.0.263",
     "@types/node": "20.8.10",
     "@types/react": "18.2.37",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "18.2.18",
     "@types/ws": "8.5.8",
     "@typescript-eslint/eslint-plugin": "6.10.0",

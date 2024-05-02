@@ -1,0 +1,46 @@
+.TaskAdd {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ffffff1a;
+    margin: 0;
+  }
+  .task-add-button {
+    background-color: #ffffff1a;
+    border: none;
+    width: 51px;
+    flex: 1 0 auto;
+    height: 51px;
+    padding: 16px;
+    transition:
+      background-color 0.2s,
+      outline 0.2s;
+    border-radius: 32px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .task-add-button-icon-container {
+      width: 16px;
+      height: 16px;
+      color: var(--white);
+      img {
+        width: 16px;
+        height: 16px;
+        opacity: 0.5;
+        transition: all var(--transition);
+      }
+    }
+    &:hover {
+      background-color: #ffffff22;
+      img {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -6,12 +6,21 @@ import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import { Hellow } from './components/Hellow';
 import { Memo } from './memo/Memo';
 import { Tasks } from './tasks/Tasks';
+import { Contact } from './components/Contact';
 
 const Newtab = () => {
   return (
     <div className="App">
-      <Hellow />
-      <Memo />
+      <div className="content-container">
+        <Hellow />
+        <div className="new-tab-content">
+          <Memo />
+          <Tasks />
+        </div>
+        <footer className="footer">
+          <Contact />
+        </footer>
+      </div>
     </div>
   );
 };

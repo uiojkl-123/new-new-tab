@@ -31,4 +31,7 @@ h6 {
   -webkit-text-fill-color: transparent;
   // filter: drop-shadow(0 40px 120px rgba(0, 0, 0, 0.2));
   text-align: center;
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
 }

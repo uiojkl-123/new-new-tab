@@ -116,6 +116,32 @@ const getData = async (database, storeName, key, entries) =>
     }
   });
 
+const getAllData = async (database, storeName) =>
+  new Promise((resolve, reject) => {
+    if (!database.objectStoreNames.contains(storeName)) {
+      console.error(`Store ${storeName} was not found in database ${database}`);
+    }
+
+    const objectStore = database.transaction([storeName]).objectStore(storeName);
+    const results = {};
+    const cursorRequest = objectStore.openCursor();
+
+    // key and values
+
+    cursorRequest.onsuccess = e => {
+      const cursor = e.target.result;
+
+      if (cursor) {
+        results[cursor.key] = cursor.value;
+        cursor.continue();
+      } else {
+        resolve(results);
+      }
+    };
+
+    cursorRequest.onerror = e => reject(e);
+  });
+
 /*
 Deletes an entry for a given store by key.
 - database            object          Database object
@@ -196,9 +222,7 @@ const db64 = {
   create: async (name, storeNames, storeDelete = 'enable-delete') => {
     if (!isString(name)) console.error(`${name} should be a string`);
     if (!isArray(storeNames)) return console.error(`${storeNames} should be an array`);
-
     const shouldDisableDelete = storeDelete === 'disable-delete';
-
     if (!shouldDisableDelete && !(await has(name, storeNames))) {
       console.log('delete');
       await deleteDB(name);
@@ -218,7 +242,8 @@ const db64 = {
       get: async key => openDatabase(name, storeName).then(database => getData(database, storeName, key)),
       getEntries: async keys =>
         openDatabase(name, storeName).then(database => getData(database, storeName, keys, 'entries')),
-      delete: async keys => openDatabase(name, storeName).then(database => deleteData(database, storeName, keys))
+      delete: async keys => openDatabase(name, storeName).then(database => deleteData(database, storeName, keys)),
+      getAll: async () => openDatabase(name, storeName).then(database => getAllData(database, storeName))
     };
   },
   clear: async (name, storeName) => openDatabase(name, storeName).then(database => clearStore(database, storeName)),

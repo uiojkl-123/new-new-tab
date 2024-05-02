@@ -1,0 +1,58 @@
+.TaskCard {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 40px;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: #ffffff1a;
+  margin-bottom: 8px;
+  padding: 16px 18px;
+  position: relative;
+  transition: all var(--transition);
+  &:hover {
+    background-color: #ffffff22;
+    .deleteButton {
+      pointer-events: all;
+      img {
+        opacity: 0.3;
+      }
+    }
+  }
+  .deleteButton {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px;
+    transition:
+      background-color 0.2s,
+      outline 0.2s;
+    border-radius: 32px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+    cursor: pointer;
+    pointer-events: none;
+    img {
+      width: 16px;
+      height: 16px;
+      opacity: 0;
+      transition: all var(--transition);
+    }
+    &:hover {
+      img {
+        opacity: 0.8;
+      }
+    }
+    &:active {
+      img {
+        opacity: 0.5;
+        transition: none;
+      }
+    }
+  }
+}
