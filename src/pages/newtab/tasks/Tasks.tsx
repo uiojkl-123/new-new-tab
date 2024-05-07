@@ -10,14 +10,12 @@ import { useTaskStore } from '@root/src/stores/NewTab/taskStore';
 import { useCallback } from 'react';
 
 export const Tasks: React.FC = () => {
-  const { isLoading, setDBData, refreshData } = useDB<{ title: string; order: number }>('tasks');
+  const { isLoading, setMultipleDBData, refreshData } = useDB<{ title: string; order: number }>('tasks');
 
   const [items, setItems] = React.useState<{ id: string; title: string; order?: number }[]>([]);
   const data = useTaskStore(state => state.task);
 
   useEffect(() => {
-    console.log(data);
-
     if (data && !isLoading) {
       setItems(
         Object.keys(data)
@@ -28,26 +26,13 @@ export const Tasks: React.FC = () => {
     return () => {};
   }, [data, isLoading]);
 
-  // useEffect(() => {
-  //   if (items.length) {
-  //     items.forEach((item, index) => {
-  //       console.log(index, item.title);
-  //       setDBData(item.id, { title: item.title, order: index });
-  //     });
-  //   }
-  //   return () => {};
-  // }, [items, refreshData, setDBData]);
-
   const handleSetItems = useCallback(
     async (items: { id: string; title: string; order?: number }[]) => {
       setItems(items);
-      await Promise.all(
-        items.map(async (item, index) => {
-          await setDBData(item.id, { title: item.title, order: index });
-        })
-      );
+      const newData = items.map((item, index) => ({ key: item.id, data: { title: item.title, order: index } }));
+      await setMultipleDBData(newData);
     },
-    [setItems, setDBData]
+    [setMultipleDBData]
   );
 
   return (

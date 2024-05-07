@@ -32,6 +32,7 @@ export const useDB = <DataType>(
 ): {
   isLoading: boolean;
   setDBData: (key: string, data: DataType) => Promise<void>;
+  setMultipleDBData: (data: { key: string; data: DataType }[]) => Promise<void>;
   addDBData: (data: DataType) => Promise<void>;
   refreshData: () => Promise<void>;
   deleteData: (key: string) => Promise<void>;
@@ -68,6 +69,16 @@ export const useDB = <DataType>(
     [name, refreshData, setIsLoading]
   );
 
+  const setMultipleDBData = useCallback(
+    async (data: { key: string; data: DataType }[]) => {
+      setIsLoading(true);
+      await Promise.all(data.map(async item => await setDB(name, item.key, item.data)));
+      await refreshData();
+      setIsLoading(false);
+    },
+    [name, refreshData, setIsLoading]
+  );
+
   const addDBData = useCallback(
     async (data: DataType) => {
       setIsLoading(true);
@@ -88,5 +99,5 @@ export const useDB = <DataType>(
     [name, refreshData, setIsLoading]
   );
 
-  return { isLoading, setDBData, refreshData, addDBData, deleteData };
+  return { isLoading, setDBData, setMultipleDBData, refreshData, addDBData, deleteData };
 };
