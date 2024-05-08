@@ -349,7 +349,7 @@ body {
   --warning-900: #997200;
 
   // Danger
-  --danger: #ff3b30;
+  --danger: #ff1e13;
   --danger-100: #ffe6e6;
   --danger-200: #ff9999;
   --danger-300: #ff6666;
@@ -397,8 +397,8 @@ body {
 
   // Background Color
   --background-transparent: #ffffff00;
-  --background-transparent-100: #ffffff1a;
-  --background-transparent-200: #ffffff1f;
+  --background-transparent-100: #ffffff0d;
+  --background-transparent-200: #ffffff17;
 
   // Outline
   --outline: 2px solid #ffffff00;
@@ -406,4 +406,10 @@ body {
 
   // inset shadow
   --input-inset-shadow: inset 0 0 0 2px #ffffff2a;
+
+  // small title color
+  --small-title-color: #ffffff66;
+
+  // notification background color
+  --notification-background: #ff3333d5;
 }

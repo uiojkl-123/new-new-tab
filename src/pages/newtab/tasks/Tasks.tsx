@@ -37,6 +37,7 @@ export const Tasks: React.FC = () => {
 
   return (
     <div className="Tasks">
+      <div className="tasks-title">할 일{<div className="tasks-count">{items.length}</div>}</div>
       <div className="tasks-container">
         <DragAndDropList items={items} setItems={handleSetItems} CardComponent={TaskCard} />
         <TaskAdd />

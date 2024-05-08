@@ -24,6 +24,7 @@ export const Memo: FC = () => {
   return (
     <div className="Memo">
       <div className="memo-container">
+        <div className="memo-title">메모</div>
         <textarea className="memo-textarea" placeholder="메모하세용" value={memo} onChange={handleChange}></textarea>
       </div>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="모냐고F">

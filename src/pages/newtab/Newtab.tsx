@@ -7,19 +7,21 @@ import { Hellow } from './components/Hellow';
 import { Memo } from './memo/Memo';
 import { Tasks } from './tasks/Tasks';
 import { Contact } from './components/Contact';
+import { SideBar } from './sideBar/SideBar';
 
 const Newtab = () => {
   return (
     <div className="App">
+      <div className="side-container">
+        <SideBar />
+      </div>
       <div className="content-container">
         <Hellow />
         <div className="new-tab-content">
           <Memo />
           <Tasks />
         </div>
-        <footer className="footer">
-          <Contact />
-        </footer>
+        <footer className="footer"></footer>
       </div>
     </div>
   );
