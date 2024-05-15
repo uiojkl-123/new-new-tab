@@ -12,9 +12,9 @@ const manifest = {
    * if you want to support multiple languages, you can use the following reference
    * https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization
    */
-  name: '__MSG_extensionName__',
+  name: 'New new tab Extension',
   version: packageJson.version,
-  description: '__MSG_extensionDescription__',
+  description: 'This extension replaces the new tab page with a new one.',
   permissions: ['storage', 'sidePanel'],
   side_panel: {
     default_path: 'src/pages/sidepanel/index.html'
@@ -36,15 +36,13 @@ const manifest = {
   },
   content_scripts: [
     {
-      // matches: newtab,
-      matches: [],
+      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
       js: ['src/pages/contentInjected/index.js'],
       // KEY for cache invalidation
       css: ['assets/css/contentStyle<KEY>.chunk.css']
     },
     {
-      // matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-      matches: [],
+      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
       js: ['src/pages/contentUI/index.js']
     }
   ],
@@ -52,7 +50,7 @@ const manifest = {
   web_accessible_resources: [
     {
       resources: ['assets/js/*.js', 'assets/css/*.css', 'icon-128.png', 'icon-34.png'],
-      matches: []
+      matches: ['*://*/*']
     }
   ]
 };
