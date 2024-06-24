@@ -1,1 +1,1 @@
-export const DB_STORENAMES = ['tasks', 'memo'];
+export const DB_STORENAMES = ['tasks', 'memo', 'bookmark'];

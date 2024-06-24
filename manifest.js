@@ -34,18 +34,18 @@ const manifest = {
   icons: {
     128: 'icon-128.png'
   },
-  content_scripts: [
-    {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-      js: ['src/pages/contentInjected/index.js'],
-      // KEY for cache invalidation
-      css: ['assets/css/contentStyle<KEY>.chunk.css']
-    },
-    {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-      js: ['src/pages/contentUI/index.js']
-    }
-  ],
+  // content_scripts: [
+  //   {
+  //     matches: [],
+  //     js: ['src/pages/contentInjected/index.js'],
+  //     // KEY for cache invalidation
+  //     css: ['assets/css/contentStyle<KEY>.chunk.css']
+  //   },
+  //   {
+  //     matches: [],
+  //     js: ['src/pages/contentUI/index.js']
+  //   }
+  // ],
   devtools_page: 'src/pages/devtools/index.html',
   web_accessible_resources: [
     {

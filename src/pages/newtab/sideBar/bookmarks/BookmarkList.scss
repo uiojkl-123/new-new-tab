@@ -1,0 +1,44 @@
+.BookmarkList {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  place-content: center;
+  place-items: flex-start;
+  .icon-container {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .bookmarkAddForm {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    min-width: 400px;
+    gap: 10px;
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      .input-label {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: var(--small-title-color);
+        padding-left: 16px;
+      }
+      .input {
+        font-size: 16px;
+        &:focus {
+          border-color: var(--background-transparent-200);
+        }
+      }
+    }
+  }
+}

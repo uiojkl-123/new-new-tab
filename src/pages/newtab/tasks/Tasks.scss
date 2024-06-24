@@ -53,5 +53,9 @@
     &:hover {
       // background-color: var(--background-transparent-200);
     }
+    .drag-drop-list-container {
+      max-height: 508px;
+      overflow: auto;
+    }
   }
 }

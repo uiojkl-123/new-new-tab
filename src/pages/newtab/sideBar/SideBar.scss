@@ -20,14 +20,8 @@
       font-weight: 700;
       opacity: 0.6;
     }
-    .side-bar-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 16px;
-      place-content: center;
-      place-items: flex-start;
-
+    .side-bar-list,
+    .BookmarkList {
       a {
         text-decoration: none;
       }
@@ -58,18 +52,21 @@
         flex-direction: row;
         gap: 12px;
         align-items: center;
-        padding: 16px 18px;
-        border-radius: 40px;
+        padding: 6px 12px;
+        height: 44px;
+        border-radius: var(--border-radius);
         font-size: 1rem;
         width: 100%;
         cursor: pointer;
         color: var(--white);
+        transition: all var(--transition) ease;
         opacity: 0.5;
-        // background-color: #ffffff1a;
-        transition: all var(--transition);
         &:hover {
           background-color: #ffffff22;
-          opacity: 1;
+          opacity: 0.9;
+        }
+        &:active {
+          transform: scale(0.98);
         }
         .side-bar-icon {
           display: flex;

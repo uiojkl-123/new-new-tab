@@ -1,10 +1,10 @@
 import { useEffect, useCallback } from 'react';
 import { uuidv7 } from 'uuidv7';
+import { useBookmarkStore } from '@root/src/stores/NewTab/bookmarkStore';
 import { DB_STORENAMES } from '@root/src/shared/constants/dbStoreNames';
-import { useMemoStore } from '@root/src/stores/NewTab/memoStore';
 import { initDB, getDBAll, setDB, deleteDB } from '@root/src/services/db';
 
-export const useMemoDB = <DataType>(
+export const useBookmarkDB = <DataType>(
   name: string
 ): {
   isLoading: boolean;
@@ -13,27 +13,27 @@ export const useMemoDB = <DataType>(
   refreshData: () => void;
   deleteData: (key: string) => void;
 } => {
-  const setMemo = useMemoStore(state => state.setMemo);
-  const isLoading = useMemoStore(state => state.isLoading);
-  const setIsLoading = useMemoStore(state => state.setIsLoading);
+  const setBookmark = useBookmarkStore(state => state.setBookmark);
+  const isLoading = useBookmarkStore(state => state.isLoading);
+  const setIsLoading = useBookmarkStore(state => state.setIsLoading);
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       await initDB(DB_STORENAMES);
-      const initMemoData = await getDBAll(name);
-      setMemo(initMemoData.memo);
+      const initBookmarkData = await getDBAll(name);
+      setBookmark(initBookmarkData);
       setIsLoading(false);
       return () => {};
     })();
-  }, [name, setIsLoading, setMemo]);
+  }, [name, setIsLoading, setBookmark]);
 
   const refreshData = useCallback(async () => {
     setIsLoading(true);
     const result = await getDBAll(name);
-    setMemo(result);
+    setBookmark(result);
     setIsLoading(false);
-  }, [name, setIsLoading, setMemo]);
+  }, [name, setIsLoading, setBookmark]);
 
   const setDBData = useCallback(
     async (key: string, data: DataType) => {
@@ -47,6 +47,9 @@ export const useMemoDB = <DataType>(
   const addDBData = useCallback(
     async (data: DataType) => {
       setIsLoading(true);
+      console.log('name', name);
+      console.log('data', data);
+
       await setDB(name, uuidv7(), data);
       await refreshData();
       setIsLoading(false);
