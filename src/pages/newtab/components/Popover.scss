@@ -1,0 +1,58 @@
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.Popover {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  z-index: 200;
+
+  min-width: 160px;
+
+  background-color: var(--gray-900);
+  padding: 4px;
+  border-radius: 8px;
+
+  animation: fadeOut 0.3s ease forwards;
+  .Popover-item {
+    padding: 7px 10px;
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 6px;
+    color: #ffffffaa;
+    user-select: none;
+    cursor: pointer;
+    background-color: var(--background-transparent);
+    &:hover {
+      color: #ffffffff;
+      background-color: var(--background-transparent-200);
+    }
+    &:active {
+      color: #ffffffcc;
+      background-color: var(--background-transparent-100);
+    }
+    &.danger {
+      &:hover {
+        color: var(--danger-500);
+      }
+      &:active {
+        color: var(--danger-300);
+      }
+    }
+  }
+}
+
+.Popover.show {
+  // opacity: 1;
+  animation: none;
+}

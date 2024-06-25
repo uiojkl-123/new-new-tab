@@ -6,12 +6,13 @@ import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import { Hellow } from './components/Hellow';
 import { Memo } from './memo/Memo';
 import { Tasks } from './tasks/Tasks';
-import { Contact } from './components/Contact';
 import { SideBar } from './sideBar/SideBar';
+import Popover from './components/Popover';
 
 const Newtab = () => {
   return (
     <div className="App">
+      <Popover />
       <div className="side-container">
         <SideBar />
       </div>
