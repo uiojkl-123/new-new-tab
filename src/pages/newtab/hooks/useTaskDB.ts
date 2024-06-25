@@ -2,7 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { uuidv7 } from 'uuidv7';
 import { useTaskStore } from '@root/src/stores/NewTab/taskStore';
 import { DB_STORENAMES } from '@root/src/shared/constants/dbStoreNames';
-import { initDB, getDBAll, setDB, deleteDB } from '@root/src/services/db';
+import { initDB, getDBAll, setDB, deleteDB, getDB } from '@root/src/services/db';
 
 export const useTaskDB = <DataType>(
   name: string
@@ -12,6 +12,7 @@ export const useTaskDB = <DataType>(
   addDBData: (data: DataType) => void;
   refreshData: () => void;
   deleteData: (key: string) => void;
+  updateData: (key: string, data: DataType) => void;
 } => {
   const setTask = useTaskStore(state => state.setTask);
   const isLoading = useTaskStore(state => state.isLoading);
@@ -64,5 +65,16 @@ export const useTaskDB = <DataType>(
     [name, refreshData, setIsLoading]
   );
 
-  return { isLoading, setDBData, refreshData, addDBData, deleteData };
+  const updateData = useCallback(
+    async (key: string, data: DataType) => {
+      setIsLoading(true);
+      const prevData = await getDB(name, key);
+      await setDB(name, key, { ...prevData, ...data });
+      await refreshData();
+      setIsLoading(false);
+    },
+    [name, refreshData, setIsLoading]
+  );
+
+  return { isLoading, setDBData, refreshData, addDBData, deleteData, updateData };
 };

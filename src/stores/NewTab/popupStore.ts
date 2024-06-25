@@ -14,8 +14,9 @@ interface PopoverState {
     label: string;
     onClick: () => void;
     type?: 'danger';
+    icon?: string;
   }[];
-  setMenu: (menu: { label: string; onClick: () => void; type?: 'danger' }[]) => void;
+  setMenu: (menu: { label: string; onClick: () => void; type?: 'danger'; icon?: string }[]) => void;
 }
 
 export const usePopoverStore = create<PopoverState>()(

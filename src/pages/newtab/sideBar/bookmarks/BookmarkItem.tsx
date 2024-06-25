@@ -4,6 +4,9 @@ import Popover from '../../components/Popover';
 import { usePopoverStore } from '@root/src/stores/NewTab/popupStore';
 import { useBookmarkDB } from '../../hooks/useBookmarksDB';
 import { useBookmarkStore } from '@root/src/stores/NewTab/bookmarkStore';
+import trashCanIcon from '@assets/icon/TrashCanIcon.svg';
+// import newTabIcon from '@assets/icon/NewTabIcon.svg';
+import NewTabIcon from '@assets/icon/NewTabIcon.svg';
 
 interface BookmarkItemProps {
   link: {
@@ -31,7 +34,8 @@ export const BookmarkItem: React.FC<BookmarkItemProps> = props => {
         onClick: () => {
           window.open(link.link, '_blank');
           setOpen(false);
-        }
+        },
+        icon: 'newtab'
       },
       {
         label: '삭제하기',
@@ -39,7 +43,8 @@ export const BookmarkItem: React.FC<BookmarkItemProps> = props => {
           setOpen(false);
           deleteData(link.id);
         },
-        type: 'danger'
+        type: 'danger',
+        icon: 'trashCan'
       }
     ]);
   };

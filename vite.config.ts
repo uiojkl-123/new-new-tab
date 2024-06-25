@@ -7,6 +7,7 @@ import { getCacheInvalidationKey, getPlugins } from './utils/vite';
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, 'src');
 const pagesDir = resolve(srcDir, 'pages');
+const iconsDir = resolve(srcDir, 'icons');
 
 const isDev = process.env.__DEV__ === 'true';
 const isProduction = !isDev;
@@ -18,7 +19,8 @@ export default defineConfig({
       '@src': srcDir,
       '@assets': resolve(srcDir, 'assets'),
       '@pages': pagesDir,
-      '@shared': resolve(srcDir, 'shared')
+      '@shared': resolve(srcDir, 'shared'),
+      '@icons': iconsDir
     }
   },
   plugins: [...getPlugins(isDev), react()],

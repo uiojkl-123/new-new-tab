@@ -32,7 +32,10 @@
 
   animation: fadeOut 0.3s ease forwards;
   .Popover-item {
-    padding: 7px 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 7px 7px;
     font-size: 14px;
     line-height: 16px;
     border-radius: 6px;
@@ -40,6 +43,7 @@
     user-select: none;
     cursor: pointer;
     background-color: var(--background-transparent);
+    transition: all 0.1s cubic-bezier(0.2, 0, 0, 1);
     &:hover {
       color: #ffffffff;
       background-color: var(--background-transparent-200);
@@ -54,6 +58,17 @@
       }
       &:active {
         color: var(--danger-300);
+      }
+    }
+    .Popover-item-icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 16px;
+        height: 16px;
       }
     }
   }

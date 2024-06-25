@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import './Popover.scss';
 import { usePopoverStore } from '@root/src/stores/NewTab/popupStore';
+import { TrashCanIcon, NewTabIcon, DoneIcon } from '../icons';
+
 interface PopoverProps {}
 
 export default function Popover(props: PopoverProps) {
@@ -31,6 +33,19 @@ export default function Popover(props: PopoverProps) {
     };
   }, [open]);
 
+  const Icon = (props: { icon: string }) => {
+    switch (props.icon) {
+      case 'newtab':
+        return <NewTabIcon />;
+      case 'trashCan':
+        return <TrashCanIcon />;
+      case 'done':
+        return <DoneIcon />;
+      default:
+        return <></>;
+    }
+  };
+
   return (
     open && (
       <div className={'Popover ' + (open ? 'show' : '')} ref={ref}>
@@ -44,6 +59,11 @@ export default function Popover(props: PopoverProps) {
             }}
             tabIndex={0}
             role="button">
+            {!!v.icon && (
+              <span className="Popover-item-icon">
+                <Icon icon={v.icon} />
+              </span>
+            )}
             {v.label}
           </div>
         ))}
