@@ -1,11 +1,11 @@
 import { useEffect, useCallback } from 'react';
 import { uuidv7 } from 'uuidv7';
-import { useTaskStore } from '@root/src/stores/NewTab/taskStore';
+import { useBookmarkStore } from '@root/src/stores/NewTab/bookmarkStore';
 import { DB_STORENAMES } from '@root/src/shared/constants/dbStoreNames';
-import { initDB, getDBAll, setDB, deleteDB, getDB } from '@root/src/services/db';
+import { initDB, getDBAll, setDB, deleteDB } from '@root/src/services/db';
 import { useVisibility } from './useVisibility';
 
-export const useTaskDB = <DataType>(
+export const useBookmarkDB = <DataType>(
   name: string
 ): {
   isLoading: boolean;
@@ -13,30 +13,30 @@ export const useTaskDB = <DataType>(
   addDBData: (data: DataType) => void;
   refreshData: () => void;
   deleteData: (key: string) => void;
-  updateData: (key: string, data: DataType) => void;
 } => {
-  const setTask = useTaskStore(state => state.setTask);
-  const isLoading = useTaskStore(state => state.isLoading);
-  const setIsLoading = useTaskStore(state => state.setIsLoading);
+  const setBookmark = useBookmarkStore(state => state.setBookmark);
+  const isLoading = useBookmarkStore(state => state.isLoading);
+  const setIsLoading = useBookmarkStore(state => state.setIsLoading);
+
   const { visibility } = useVisibility();
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       await initDB(DB_STORENAMES);
-      const initMemoData = await getDBAll(name);
-      setTask(initMemoData);
+      const initBookmarkData = await getDBAll(name);
+      setBookmark(initBookmarkData);
       setIsLoading(false);
       return () => {};
     })();
-  }, [name, setIsLoading, setTask]);
+  }, [name, setIsLoading, setBookmark]);
 
   const refreshData = useCallback(async () => {
     setIsLoading(true);
     const result = await getDBAll(name);
-    setTask(result);
+    setBookmark(result);
     setIsLoading(false);
-  }, [name, setIsLoading, setTask]);
+  }, [name, setIsLoading, setBookmark]);
 
   const setDBData = useCallback(
     async (key: string, data: DataType) => {
@@ -50,6 +50,9 @@ export const useTaskDB = <DataType>(
   const addDBData = useCallback(
     async (data: DataType) => {
       setIsLoading(true);
+      console.log('name', name);
+      console.log('data', data);
+
       await setDB(name, uuidv7(), data);
       await refreshData();
       setIsLoading(false);
@@ -67,22 +70,11 @@ export const useTaskDB = <DataType>(
     [name, refreshData, setIsLoading]
   );
 
-  const updateData = useCallback(
-    async (key: string, data: DataType) => {
-      setIsLoading(true);
-      const prevData = await getDB(name, key);
-      await setDB(name, key, { ...prevData, ...data });
-      await refreshData();
-      setIsLoading(false);
-    },
-    [name, refreshData, setIsLoading]
-  );
-
   useEffect(() => {
     if (visibility) {
       refreshData();
     }
   }, [visibility, refreshData]);
 
-  return { isLoading, setDBData, refreshData, addDBData, deleteData, updateData };
+  return { isLoading, setDBData, refreshData, addDBData, deleteData };
 };

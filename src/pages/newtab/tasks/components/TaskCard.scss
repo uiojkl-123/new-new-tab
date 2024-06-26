@@ -56,3 +56,20 @@
     }
   }
 }
+
+.TaskCard-text-container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  gap: 4px;
+
+  .TaskCard-text-title {
+    font-weight: 600;
+  }
+
+  .TaskCard-sub {
+    font-size: 0.6rem;
+    color: var(--gray-500);
+  }
+}
