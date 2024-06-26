@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import './Popover.scss';
 import { usePopoverStore } from '@root/src/stores/NewTab/popupStore';
-import { TrashCanIcon, NewTabIcon, DoneIcon } from '../icons';
+import { TrashCanIcon, NewTabIcon, DoneIcon, ReIcon } from '../icons';
 
 interface PopoverProps {}
 
@@ -41,6 +41,8 @@ export default function Popover(props: PopoverProps) {
         return <TrashCanIcon />;
       case 'done':
         return <DoneIcon />;
+      case 're':
+        return <ReIcon />;
       default:
         return <></>;
     }

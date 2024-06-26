@@ -1,20 +1,14 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState , useCallback } from 'react';
 // eslint-disable-next-line import/named
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 
 import './DragAndDropList.scss';
-import { useCallback } from 'react';
-
-interface Item {
-  id: string;
-  title: string;
-  order?: number;
-}
+import { Item } from '@root/src/pages/newtab/tasks/Tasks';
 
 interface DragAndDropListProps {
   items: Item[];
   setItems: (items: Item[]) => void;
-  CardComponent: FC<{ targetTitle: string; targetId: string }>;
+  CardComponent: FC<{ item: Item }>;
 }
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -68,7 +62,7 @@ export const DragAndDropList: FC<DragAndDropListProps> = props => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
-                    <CardComponent targetTitle={item.title} targetId={item.id} />
+                    <CardComponent item={item} />
                   </div>
                 )}
               </Draggable>
