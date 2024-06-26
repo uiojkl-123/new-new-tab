@@ -1,18 +1,16 @@
-import React, { FC, useState } from 'react';
-
+import React, { FC } from 'react';
 import './Memo.scss';
-import { Modal } from '@root/src/shared/components/Modal';
-import { Popup } from '@root/src/shared/components/Popup';
 import { useMemoDB } from '../hooks/useMemoDB';
 import { useMemoStore } from '@root/src/stores/NewTab/memoStore';
 
 export const Memo: FC = () => {
+  // 🪝 React Hooks
   const { isLoading, setDBData } = useMemoDB<string>('memo');
 
-  const memo = useMemoStore(state => state.memo);
+  // 📦 Store
+  const { memo, setMemo } = useMemoStore();
 
-  const setMemo = useMemoStore(state => state.setMemo);
-
+  // 🎁 Event Handler
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMemo(e.target.value);
     setDBData('memo', e.target.value);

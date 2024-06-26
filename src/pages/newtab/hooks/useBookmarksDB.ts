@@ -3,6 +3,7 @@ import { uuidv7 } from 'uuidv7';
 import { useBookmarkStore } from '@root/src/stores/NewTab/bookmarkStore';
 import { DB_STORENAMES } from '@root/src/shared/constants/dbStoreNames';
 import { initDB, getDBAll, setDB, deleteDB } from '@root/src/services/db';
+import { useVisibility } from './useVisibility';
 
 export const useBookmarkDB = <DataType>(
   name: string
@@ -16,6 +17,8 @@ export const useBookmarkDB = <DataType>(
   const setBookmark = useBookmarkStore(state => state.setBookmark);
   const isLoading = useBookmarkStore(state => state.isLoading);
   const setIsLoading = useBookmarkStore(state => state.setIsLoading);
+
+  const { visibility } = useVisibility();
 
   useEffect(() => {
     (async () => {
@@ -66,6 +69,12 @@ export const useBookmarkDB = <DataType>(
     },
     [name, refreshData, setIsLoading]
   );
+
+  useEffect(() => {
+    if (visibility) {
+      refreshData();
+    }
+  }, [visibility, refreshData]);
 
   return { isLoading, setDBData, refreshData, addDBData, deleteData };
 };

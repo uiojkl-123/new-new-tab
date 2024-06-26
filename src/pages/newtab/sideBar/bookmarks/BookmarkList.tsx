@@ -9,11 +9,12 @@ import { Input } from '@root/src/shared/components/Input';
 import { useBookmarkDB } from '../../hooks/useBookmarksDB';
 import { useBookmarkStore } from '@root/src/stores/NewTab/bookmarkStore';
 import { BookmarkItem } from './BookmarkItem';
-import Popover from '../../components/Popover';
+import { useVisibility } from '../../hooks/useVisibility';
 
 interface BookmarkListProps {}
 
 export const BookmarkList: React.FC<BookmarkListProps> = props => {
+  // 📍 Local State
   const [popUpOpen, setPopUpOpen] = React.useState(false);
   const [link, setLink] = React.useState('');
   const [linkName, setLinkName] = React.useState('');
@@ -21,17 +22,22 @@ export const BookmarkList: React.FC<BookmarkListProps> = props => {
 
   const [items, setItems] = React.useState([]);
 
+  // 📦 Store
   const { bookmark } = useBookmarkStore();
+  const { visibility } = useVisibility();
 
+  // 🪝 React Hooks
   const { addDBData } = useBookmarkDB('bookmark');
 
+  // 🍃 React Lifecycle
   useEffect(() => {
     if (bookmark) {
       if (items.length === Object.keys(bookmark).length) return;
       setItems(Object.keys(bookmark).map(key => ({ id: key, ...bookmark[key] })));
     }
-  }, [bookmark, items.length]);
+  }, [bookmark, items.length, visibility]);
 
+  // 🎁 Event Handler
   const handleAddBookmark = () => {
     addDBData({ linkName: linkName, link: link, icon: icon ? icon : storelinkIcon });
   };

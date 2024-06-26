@@ -3,6 +3,7 @@ import { uuidv7 } from 'uuidv7';
 import { useTaskStore } from '@root/src/stores/NewTab/taskStore';
 import { DB_STORENAMES } from '@root/src/shared/constants/dbStoreNames';
 import { initDB, getDBAll, setDB, deleteDB, getDB } from '@root/src/services/db';
+import { useVisibility } from './useVisibility';
 
 export const useTaskDB = <DataType>(
   name: string
@@ -17,6 +18,7 @@ export const useTaskDB = <DataType>(
   const setTask = useTaskStore(state => state.setTask);
   const isLoading = useTaskStore(state => state.isLoading);
   const setIsLoading = useTaskStore(state => state.setIsLoading);
+  const { visibility } = useVisibility();
 
   useEffect(() => {
     (async () => {
@@ -75,6 +77,12 @@ export const useTaskDB = <DataType>(
     },
     [name, refreshData, setIsLoading]
   );
+
+  useEffect(() => {
+    if (visibility) {
+      refreshData();
+    }
+  }, [visibility, refreshData]);
 
   return { isLoading, setDBData, refreshData, addDBData, deleteData, updateData };
 };
